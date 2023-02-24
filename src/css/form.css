@@ -108,9 +108,12 @@ input[type="email"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect, inp
 	line-height: 1;
 	text-align: center;
 	padding: 8px 16px 6px;
-	margin-right: -1px;
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:first-of-type {
+  border-right: 0;
 }
 
 .switch-field label:hover {

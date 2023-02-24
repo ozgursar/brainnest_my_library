@@ -60,6 +60,7 @@ header {
   gap: 10px;
   white-space: nowrap;
   font-size: 20px;
+  margin-left: -7px;
 }
 
 .logo svg {

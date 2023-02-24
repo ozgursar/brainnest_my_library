@@ -3,7 +3,6 @@ import Book from "./book.js"
 import './css/style.css';
 import favicon from './images/bookshelf.svg'
 import checkicon from './images/check.svg'
-import bodyBgImg from './images/chuttersnap-Zf64Osndqvc-unsplash.jpg'
 import placeholder from './images/placeholder.jpg'
 import bcanna from './images/book-cover-anna-karenina.jpg'
 
@@ -18,6 +17,7 @@ renderCards()
 
 function renderCards() {
   cards.replaceChildren()
+  if (myLibrary.length) {
   myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead }, index) => {
     const newCard = htmlToElements(
       `<article class="card" data-id="${index}">
@@ -26,15 +26,27 @@ function renderCards() {
           <figcaption><h2 class="card-title">${title} - ${index}</h2></figcaption>
         </figure>
         <ul class="card-meta">
-          <li><i class="icon-account-edit" aria-label="Author" title="Author"></i><span>${author}</span></li>
-          <li><i class="icon-pages" aria-label="Number of pages"></i><span>${pages} pages</span></li>
-          <li><i class="icon-translate" aria-label="Language"></i><span>${language}</span></li>
-          <li><i class="icon-calendar-clock" aria-label="Publish date"></i><span>${new Date(publishDate).toLocaleDateString('en-GB')}</span></li>
+          <li><i class="icon-account-edit" aria-label="Author" title="Author"></i><span>By ${author}</span></li>
+          <li><i class="icon-pages" aria-label="Number of pages" title="Number of pages"></i><span>${pages} pages</span></li>
+          <li><i class="icon-translate" aria-label="Language" title="Language"></i><span>${language}</span></li>
+          <li><i class="icon-calendar-clock" aria-label="Publish date" title="Publish date"></i><span>${new Date(publishDate).toLocaleDateString('en-GB')}</span></li>
         </ul>
+        <div class="isread-toggle">
+          <small>Is Read?</small>
+          <div class="switch-field">
+            <input type="radio" id="toggle-radio-${index}-yes" name="isreadradio-${index}" value="yes" ${isRead ? 'checked' : ''} onInput="handleToggleRead({item: ${index}, value: true})">
+            <label for="toggle-radio-${index}-yes">Yes</label>
+            <input type="radio" id="toggle-radio-${index}-no" name="isreadradio-${index}" value="no" ${!isRead ? 'checked' : ''} onInput="handleToggleRead({item: ${index}, value: false})">
+            <label for="toggle-radio-${index}-no">No</label>
+          </div>
+        </div>
         <i class="icon-close" aria-label="Delete book" onClick="handleDelete(this.parentNode.getAttribute('data-id'))"></i>
       </article>`)
   cards.appendChild(newCard[0])
   })
+  } else {
+    cards.textContent = 'No books present in the library.'
+  }
 }
 
 const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio}) => {
@@ -74,6 +86,12 @@ const handleSubmit = (e) => {
 
 window.handleDelete = (targetIndex) => {
   myLibrary.splice(targetIndex, 1)
+  updateLocalStorage()
+  renderCards()
+}
+
+window.handleToggleRead = ({item, value}) => {
+  myLibrary[item].isRead=value
   updateLocalStorage()
   renderCards()
 }
