@@ -1,10 +1,9 @@
 import { openModal, closeModal } from "./modal.js"
 import Book from "./book.js"
-import './css/style.css';
+import './css/style.css'
 import favicon from './images/bookshelf.svg'
 import checkicon from './images/check.svg'
 import placeholder from './images/placeholder.jpg'
-import bcanna from './images/book-cover-anna-karenina.jpg'
 
 // Elements
 const addBtn = document.querySelector(".add-btn")
@@ -18,11 +17,11 @@ renderCards()
 function renderCards() {
   cards.replaceChildren()
   if (myLibrary.length) {
-  myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead }, index) => {
+  myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead, bookcover }, index) => {
     const newCard = htmlToElements(
       `<article class="card" data-id="${index}">
         <figure>
-          <img src="./images/placeholder.jpg" alt="${title}">
+          <img src="${bookcover ? bookcover : './images/placeholder.jpg'}" alt="${title}">
           <figcaption><h2 class="card-title">${title}</h2></figcaption>
         </figure>
         <ul class="card-meta">
@@ -45,15 +44,15 @@ function renderCards() {
   cards.appendChild(newCard[0])
   })
   } else {
-    cards.textContent = 'No books present in the library.'
+    cards.textContent = "No books present in the library."
   }
 }
 
-const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio}) => {
+const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio, bookcover}) => {
   // TODO: Add validator https://www.npmjs.com/package/validator
   let isRead = false
   if (isreadradio === "yes") isRead = true
-  const book = new Book (title, author, pages, language, publishDate, isRead)
+  const book = new Book (title, author, pages, language, publishDate, isRead, bookcover)
   myLibrary.push (book)
   updateLocalStorage()
   renderCards()
@@ -72,7 +71,8 @@ function htmlToElements (html) {
 
 // Handlers
 const handleAddBookButton = () => {
-  addForm.reset()   // Reset form before opening modal
+  addForm.reset()
+  document.querySelector('.book-cover-preview').src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQUFBQYGBgYICQgJCAwLCgoLDBINDg0ODRIbERQRERQRGxgdGBYYHRgrIh4eIisyKigqMjw2NjxMSExkZIYBBQUFBQUFBgYGBggJCAkIDAsKCgsMEg0ODQ4NEhsRFBERFBEbGB0YFhgdGCsiHh4iKzIqKCoyPDY2PExITGRkhv/CABEIAMgAyAMBIgACEQEDEQH/xAAcAAEBAQEAAwEBAAAAAAAAAAAAAQYHAgQFAwj/2gAIAQEAAAAA/rMAAAFgAAALAAAAWAAAAsAAABYAAACwAAAFgAAALAMl4gHuaMFgGL2gBi9oCwDF7QOF9H1rF7QFgGL2gc22H2WL2gLAMXtMhkuuHh63uYvaAsAxf68L/LpPX/DiPxu+ZnaAsA47z78jpPzcQ+70noQLAP5i9QA2HeAWAZP1gD633wWAAAAsAAABYAAACwAAAFgAAALAAAAWAAAAsAAABf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAIAQIQAAAA0AAAAAAAABQQCxZYBbcakA10S55gKIAAAAAAAAAf/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//aAAgBAxAAAADIAAAAAAAAAJQBLKAzN5tAzzWa6AIKAAAAAAAAAf/EAD0QAAECAwIIDAQFBQAAAAAAAAECAwQFBgAxEhYgMEBBUpMQESEiNDZRVWJ0dbETFHHCByNDc7JCYZHB0f/aAAgBAQABPwDSBeNJF40kXjSReNJF40kXjSReNJF4zDlXMfHfbhpbMIlLThbU4y1hIwk3i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i0tqSGmEb8kuEi4Z8t4aEPt4GGB2ZYvGYojoUz9Te9k5qN68SvyTn3ZYvGYojoUz9Te9k5U6rGcRUe78rFLYYbcIbSjk5BrVaj55ETuXLVFcReZcwFKA4sIXg8Mb14lfkXPuyxeMxRHQpn6m97Jypv+HyY2OciYOLS0l1eEttSOMJJvKbSKSQ8hgRCsqKyVYbiz/UrhjevEr8i592WLxmKI6FM/U3vZPBVNUsyNksMFK4xaeanUgbSrUrWjrb3yc2eKkOK5j6r0E6leHIccbabW44tKUJSVKUo8QAGs2gJhBzOHTEwbyXGiSOMdo1EG7gjevEr8i592WLxmKI6FM/U3vZNqpqlmRslhgpXGLTzU6kDaVZ992JeW88tS3FqJUpV5J4KQrAwnw5dMnPybmnj+n4VeG19nHG2W1uOLSlCUlSlKPEABrNqsqxycrMJCFSINJ+hdI1nw9gtIJ9FSGL+K1zmlcjrWpQ/7aXTGEmkI3FQrmE2r/IPYew2jevEr8i592WLxmIOp25FK5kyyAqLdmL5QDcgcQGEbPvvRLy3nnFLcWrjUpXKScikKwEIG5dMnPyLmXj+n4VeG1WVWucOGEhFFMGlX0LpGs+HsHDIZ9FyGLDrRwmlcjrRuWP9HsNm5jCTSrpPFQrmEhUC59UnnchyxeMxH9Oi/wB9z+WaoXrHDftufxyxeMxGUVIY2JdiFsuJW4oqVgLIBJtiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tKaZlEmeU/CtK+IU4OGtWEQP7ZYvGki8aSLxpIvGki8aSLxpIvGki8aSLxb/8QAHxEAAQMFAQEBAAAAAAAAAAAAAQARUQIQITBBUBIx/9oACAECAQE/APXCxCxCxCxCxGjhvS3Uf1DRwqml1VTFvnCHdFIe7B3sR3S5lOZTmU5lOfZ//8QAHhEAAQMFAQEAAAAAAAAAAAAAAAERUQIQITBBUBL/2gAIAQMBAT8A9jMmZMyZkzo7ep+CC6OlVTFNU2+si6Kla7qzWReaWSBkgZIGSBk9n//Z"
   openModal()
 }
 
@@ -105,3 +105,21 @@ if (addForm) {
   addForm.addEventListener('submit', handleSubmit)
 }
 
+
+// Book cover image
+window.previewFile = () => {
+  const preview = document.querySelector('.book-cover-preview')
+  const file = document.querySelector('input[type=file]').files[0]
+  const bookcover = document.querySelector('.bookcover')
+  const reader = new FileReader()
+
+  reader.addEventListener("load", () => {
+    // convert image file to base64 string and store the value in hidden bookcover field
+    preview.src = reader.result
+    bookcover.value = reader.result
+  }, false)
+
+  if (file) {
+    reader.readAsDataURL(file)
+  }
+}

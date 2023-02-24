@@ -1,7 +1,10 @@
 .add-form {
   background-color: var(--modal-content-background);
-  border-radius: 4px;
-  padding: 20px 20px 30px 20px;
+  padding: 0;
+}
+
+.form-inner {
+  padding: 20px;
 }
 
 .input-fields {
@@ -9,6 +12,12 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 30px;
   margin: 30px 0;
+}
+
+.two-col-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 input, label, select {
@@ -35,6 +44,9 @@ select {
   width: 100%;
 }
 
+#publishDate {
+  width: 92%;
+}
 
 input::placeholder, textarea::placeholder {
   color: var(--subtle-gray);
@@ -47,7 +59,7 @@ input::placeholder, textarea::placeholder {
 img.check {
   position: absolute;
   bottom: 10px;
-  right: 5px;
+  right: 20px;
   z-index: 1;
   width: 13px;
   height: 13px;
@@ -70,7 +82,7 @@ input:not(:placeholder-shown):invalid {
   box-shadow: 0 0 0 1px red;
 }
 
-input:not(:placeholder-shown):valid {
+input:not(:placeholder-shown):not(#publishDate):not(#book-cover-file):valid {
   box-shadow: 0 0 0 1px green;
 }
 
@@ -133,6 +145,19 @@ input[type="email"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect, inp
 	border-radius: 0 4px 4px 0;
 }
 
+.book-cover-preview {
+  width: 220px;
+  max-width: 220px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.modal-footer {
+  background-color: var(--header-background);
+  padding: 20px;
+}
+
 .submit-btn {
-  margin-left: auto;
+  margin: 0 auto;
 }
