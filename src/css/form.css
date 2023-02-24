@@ -1,0 +1,135 @@
+.add-form {
+  background-color: var(--modal-content-background);
+  border-radius: 4px;
+  padding: 20px 20px 30px 20px;
+}
+
+.input-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin: 30px 0;
+}
+
+input, label, select {
+  display: block;
+}
+
+label {
+  color: var(--secondary);
+  text-transform: uppercase;
+  font-size: 0.70rem;
+  font-weight: 600;
+  padding-bottom: 3px;
+}
+
+input, select {
+  color: var(--secondary);
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  width: 96%;
+  padding: 8px;
+}
+
+select {
+  width: 100%;
+}
+
+
+input::placeholder, textarea::placeholder {
+  color: var(--subtle-gray);
+}
+
+.input-group {
+  position: relative;  
+}
+
+img.check {
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  opacity: 0;
+}
+
+.incorrect {
+  position: absolute;
+  font-size: 0.75em;
+  color: red;
+  padding-top: 4px;
+  opacity: 0;
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 0 1px blue;
+}
+
+input:not(:placeholder-shown):invalid {
+  box-shadow: 0 0 0 1px red;
+}
+
+input:not(:placeholder-shown):valid {
+  box-shadow: 0 0 0 1px green;
+}
+
+input:not(:placeholder-shown):valid +img.check {
+  opacity: 1;
+}
+
+input[type="text"]:not(:placeholder-shown):invalid ~.incorrect {
+  opacity: 1;
+}
+
+input[type="email"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect, input[type="tel"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect {
+  opacity: 1;
+}
+
+.switch-field {
+	display: flex;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: var(--btn-text-color);
+	font-size: 12px;
+  font-weight: 400;
+	line-height: 1;
+	text-align: center;
+	padding: 8px 16px 6px;
+	margin-right: -1px;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: var(--accent);
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
+
+.submit-btn {
+  margin-left: auto;
+}
