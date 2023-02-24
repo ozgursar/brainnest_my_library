@@ -32,7 +32,6 @@ function handleSortChange () {
       myLibrary.sort(function(a, b) {
         return Date.parse(a.dateOfAdd) - Date.parse(b.dateOfAdd)
       });
-      console.log (myLibrary)
   }
   renderCards (myLibrary)
 }
