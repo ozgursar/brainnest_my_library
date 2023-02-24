@@ -14,10 +14,10 @@ const cards = document.querySelector(".cards")
 
 // Initial render from local storage
 let myLibrary = localStorage.getItem('myLibrary') ? JSON.parse(localStorage.getItem('myLibrary')) : []
-console.log(myLibrary)
 renderCards()
 
 function renderCards() {
+  cards.replaceChildren()
   myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead }, index) => {
     const newCard = htmlToElements(
       `<article class="card" data-id="${index}">
@@ -43,11 +43,15 @@ const addBookToLibrary = ({title, author, pages, language, publishDate, isreadra
   if (isreadradio === "yes") isRead = true
   const book = new Book (title, author, pages, language, publishDate, isRead)
   myLibrary.push (book)
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+  updateLocalStorage()
   renderCards()
 }
 
 // Helpers
+function updateLocalStorage () {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
+
 function htmlToElements (html) {
   let template = document.createElement('template')
   template.innerHTML = html
@@ -69,12 +73,9 @@ const handleSubmit = (e) => {
 }
 
 window.handleDelete = (targetIndex) => {
-  // Remove element from DOM
-  const elementToRemove = document.querySelector(`[data-id="${targetIndex}"]`);
-  elementToRemove.remove()
-
   myLibrary.splice(targetIndex, 1)
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+  updateLocalStorage()
+  renderCards()
 }
 
 // Event listeners
