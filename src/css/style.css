@@ -20,7 +20,7 @@
 
 body {
   display: grid;
-  grid-template-rows: 1fr 40px;
+  grid-template-rows: 1fr max-content;
   margin: 0;
   padding: 0;
   font-family: 'Ubuntu', sans-serif;
@@ -127,12 +127,16 @@ main {
 }
 
 footer {
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content auto;
   align-items: center;
   justify-content: space-between;
+  gap: 15px;
   background-color: #333;
   color: #fff;
   font-size: 0.9em;
+  line-height: 1.5;
+  padding: 10px 40px;
 }
 
 
@@ -143,5 +147,12 @@ footer {
   }
   .logo h1{
     display: none;
+  }
+  footer {
+    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+  footer small {
+    text-align: center;
   }
 }
