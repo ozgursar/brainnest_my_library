@@ -10,7 +10,6 @@ const openModal = (e) => {
 }
 
 const closeModal = (e) => {
-  //console.log(e.currentTarget)
   if (e.target && !e.currentTarget.classList.contains("modal-content")) {
     document.body.style.overflow = "auto"
     modal.style.display = "none"

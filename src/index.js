@@ -1,5 +1,6 @@
 import { openModal, closeModal } from "./modal.js"
 import Book from "./book.js"
+import handleSortChange from "./sort-books.js"
 import './css/style.css'
 import favicon from './images/bookshelf.svg'
 import checkicon from './images/check.svg'
@@ -9,15 +10,43 @@ import placeholder from './images/placeholder.jpg'
 const addBtn = document.querySelector(".add-btn")
 const addForm = document.querySelector(".add-form")
 const cards = document.querySelector(".cards")
+const sortSelection = document.querySelector('#sort-selection')
 
 // Initial render from local storage
+// Force default sort (by date of addition) in inital render
 let myLibrary = localStorage.getItem('myLibrary') ? JSON.parse(localStorage.getItem('myLibrary')) : []
+handleSortChange()
 renderCards()
 
-function renderCards() {
+const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio, bookcover}) => {
+  let isRead = false
+  if (isreadradio === "yes") isRead = true
+  const book = new Book (title, author, pages, language, publishDate, isRead, bookcover)
+  myLibrary.push (book)
+  updateLocalStorage()
+  renderCards()
+}
+
+// Helpers
+function updateLocalStorage () {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
+
+function htmlToElements (html) {
+  let template = document.createElement('template')
+  template.innerHTML = html
+  return template.content.childNodes
+}
+
+function renderCards(itemToRender) {
   cards.replaceChildren()
-  if (myLibrary.length) {
-  myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead, bookcover }, index) => {
+
+  let renderedLibrary = myLibrary
+  if (itemToRender) {
+    renderedLibrary = itemToRender
+  }
+  if (renderedLibrary.length) {
+  renderedLibrary.forEach ( ({title, author, pages, language, publishDate, isRead, bookcover }, index) => {
     const newCard = htmlToElements(
       `<article class="card" data-id="${index}">
         <figure>
@@ -48,29 +77,9 @@ function renderCards() {
   }
 }
 
-const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio, bookcover}) => {
-  // TODO: Add validator https://www.npmjs.com/package/validator
-  let isRead = false
-  if (isreadradio === "yes") isRead = true
-  const book = new Book (title, author, pages, language, publishDate, isRead, bookcover)
-  myLibrary.push (book)
-  updateLocalStorage()
-  renderCards()
-}
-
-// Helpers
-function updateLocalStorage () {
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
-}
-
-function htmlToElements (html) {
-  let template = document.createElement('template')
-  template.innerHTML = html
-  return template.content.childNodes
-}
-
 // Handlers
 const handleAddBookButton = () => {
+  document.querySelector('.bookcover').value="" // Form reset does not reset hidden fields. Needs manual reset
   addForm.reset()
   document.querySelector('.book-cover-preview').src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQUFBQYGBgYICQgJCAwLCgoLDBINDg0ODRIbERQRERQRGxgdGBYYHRgrIh4eIisyKigqMjw2NjxMSExkZIYBBQUFBQUFBgYGBggJCAkIDAsKCgsMEg0ODQ4NEhsRFBERFBEbGB0YFhgdGCsiHh4iKzIqKCoyPDY2PExITGRkhv/CABEIAMgAyAMBIgACEQEDEQH/xAAcAAEBAQEAAwEBAAAAAAAAAAAAAQYHAgQFAwj/2gAIAQEAAAAA/rMAAAFgAAALAAAAWAAAAsAAABYAAACwAAAFgAAALAMl4gHuaMFgGL2gBi9oCwDF7QOF9H1rF7QFgGL2gc22H2WL2gLAMXtMhkuuHh63uYvaAsAxf68L/LpPX/DiPxu+ZnaAsA47z78jpPzcQ+70noQLAP5i9QA2HeAWAZP1gD633wWAAAAsAAABYAAACwAAAFgAAALAAAAWAAAAsAAABf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAIAQIQAAAA0AAAAAAAABQQCxZYBbcakA10S55gKIAAAAAAAAAf/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//aAAgBAxAAAADIAAAAAAAAAJQBLKAzN5tAzzWa6AIKAAAAAAAAAf/EAD0QAAECAwIIDAQFBQAAAAAAAAECAwQFBgAxEhYgMEBBUpMQESEiNDZRVWJ0dbETFHHCByNDc7JCYZHB0f/aAAgBAQABPwDSBeNJF40kXjSReNJF40kXjSReNJF4zDlXMfHfbhpbMIlLThbU4y1hIwk3i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i0tqSGmEb8kuEi4Z8t4aEPt4GGB2ZYvGYojoUz9Te9k5qN68SvyTn3ZYvGYojoUz9Te9k5U6rGcRUe78rFLYYbcIbSjk5BrVaj55ETuXLVFcReZcwFKA4sIXg8Mb14lfkXPuyxeMxRHQpn6m97Jypv+HyY2OciYOLS0l1eEttSOMJJvKbSKSQ8hgRCsqKyVYbiz/UrhjevEr8i592WLxmKI6FM/U3vZPBVNUsyNksMFK4xaeanUgbSrUrWjrb3yc2eKkOK5j6r0E6leHIccbabW44tKUJSVKUo8QAGs2gJhBzOHTEwbyXGiSOMdo1EG7gjevEr8i592WLxmKI6FM/U3vZNqpqlmRslhgpXGLTzU6kDaVZ992JeW88tS3FqJUpV5J4KQrAwnw5dMnPybmnj+n4VeG19nHG2W1uOLSlCUlSlKPEABrNqsqxycrMJCFSINJ+hdI1nw9gtIJ9FSGL+K1zmlcjrWpQ/7aXTGEmkI3FQrmE2r/IPYew2jevEr8i592WLxmIOp25FK5kyyAqLdmL5QDcgcQGEbPvvRLy3nnFLcWrjUpXKScikKwEIG5dMnPyLmXj+n4VeG1WVWucOGEhFFMGlX0LpGs+HsHDIZ9FyGLDrRwmlcjrRuWP9HsNm5jCTSrpPFQrmEhUC59UnnchyxeMxH9Oi/wB9z+WaoXrHDftufxyxeMxGUVIY2JdiFsuJW4oqVgLIBJtiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tKaZlEmeU/CtK+IU4OGtWEQP7ZYvGki8aSLxpIvGki8aSLxpIvGki8aSLxb/8QAHxEAAQMFAQEBAAAAAAAAAAAAAQARUQIQITBBUBIx/9oACAECAQE/APXCxCxCxCxCxGjhvS3Uf1DRwqml1VTFvnCHdFIe7B3sR3S5lOZTmU5lOfZ//8QAHhEAAQMFAQEAAAAAAAAAAAAAAAERUQIQITBBUBL/2gAIAQMBAT8A9jMmZMyZkzo7ep+CC6OlVTFNU2+si6Kla7qzWReaWSBkgZIGSBk9n//Z"
   openModal()
@@ -93,20 +102,8 @@ window.handleDelete = (targetIndex) => {
 window.handleToggleRead = ({item, value}) => {
   myLibrary[item].isRead=value
   updateLocalStorage()
-  renderCards()
 }
 
-// Event listeners
-if (addBtn) {
-  addBtn.addEventListener('click', handleAddBookButton)
-}
-
-if (addForm) {
-  addForm.addEventListener('submit', handleSubmit)
-}
-
-
-// Book cover image
 window.previewFile = () => {
   const preview = document.querySelector('.book-cover-preview')
   const file = document.querySelector('input[type=file]').files[0]
@@ -123,3 +120,18 @@ window.previewFile = () => {
     reader.readAsDataURL(file)
   }
 }
+
+// Event listeners
+if (addBtn) {
+  addBtn.addEventListener('click', handleAddBookButton)
+}
+
+if (addForm) {
+  addForm.addEventListener('submit', handleSubmit)
+}
+
+if (sortSelection) {
+  sortSelection.addEventListener ('change', handleSortChange)
+}
+
+export { myLibrary, renderCards, sortSelection }

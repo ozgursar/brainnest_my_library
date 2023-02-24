@@ -9,10 +9,20 @@
 </head>
 <body>
   <header>
-    <section class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>
-      <h1>My Library</h1>
+    <section class="logo" aria-labelledby="site-title">
+      <a href="./index.html" class="home-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>
+      </a>
+      <h1 id="site-title">My Library</h1>
     </section>
+    <select id="sort-selection">
+      <option value="default">Default Sort</option>
+      <option value="title">By Title</option>
+      <option value="author">By Author</option>
+      <option value="language">By Language</option>
+      <option value="pages">By Pages</option>
+      <option value="isRead">By Read Status</option>
+    </select>
     <button type="submit" class="add-btn btn">
       <i class="icon-plus" aria-hidden="true"></i>
     </button>
@@ -94,7 +104,7 @@
             </div>
             <div class="two-col-inputs">
               <div class="input-group">
-                <label for="book-cover-file">Book Cover Image (Optional)</label>
+                <label for="book-cover-file">Book Cover (Optional)</label>
                 <input type="file" id="book-cover-file" onchange="previewFile()">
               </div>
               <div class="input-group">

@@ -7,6 +7,7 @@ class Book {
     this.publishDate = publishDate
     this.isRead = isRead
     this.bookcover = bookcover
+    this.dateOfAdd = new Date()
   }
   toggleRead = function () {
     this.isRead = !this.isRead

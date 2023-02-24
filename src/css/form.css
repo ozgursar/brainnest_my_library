@@ -4,7 +4,7 @@
 }
 
 .form-inner {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
 }
 
 .input-fields {
@@ -78,7 +78,7 @@ input:focus, textarea:focus {
   box-shadow: 0 0 0 1px blue;
 }
 
-input:not(:placeholder-shown):invalid {
+input:not(:placeholder-shown):not(#publishDate):invalid {
   box-shadow: 0 0 0 1px red;
 }
 
@@ -146,16 +146,17 @@ input[type="email"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect, inp
 }
 
 .book-cover-preview {
-  width: 220px;
+  width: 100%;
   max-width: 220px;
-  height: auto;
+  height: 120px;
   object-fit: cover;
+  object-position: center;
   border-radius: 4px;
 }
 
 .modal-footer {
   background-color: var(--header-background);
-  padding: 20px;
+  padding: 8px 0 10px 0;
 }
 
 .submit-btn {

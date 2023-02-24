@@ -51,9 +51,10 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto max-content max-content;
+  gap: 15px;
   align-items: center;
-  justify-content: space-between;
   background-color: var(--header-background);
   min-height: 70px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
@@ -72,6 +73,11 @@ header {
   fill: var(--logo-color);
   height: 60px;
   width: auto;
+  transition: fill 0.2s ease-in-out;
+}
+
+.home-link:hover svg {
+  fill: var(--accent);
 }
 
 .logo h1 {
@@ -129,3 +135,13 @@ footer {
   font-size: 0.9em;
 }
 
+
+/* MOBILE */
+@media (max-width: 529px) {
+  .logo svg {
+    height: 50px;
+  }
+  .logo h1{
+    display: none;
+  }
+}
