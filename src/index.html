@@ -19,7 +19,7 @@
   </header>
   <main>
     <section class="cards" aria-label="Books List">
-      <article class="card">
+      <article class="card" data-id="-1">
         <figure>
           <img src="./images/book-cover-anna-karenina.jpg" alt="Anna Karenina">
           <figcaption><h2 class="card-title">Anna Karenina</h2></figcaption>
@@ -30,18 +30,7 @@
           <li><i class="icon-translate"></i><span>English</span></li>
           <li><i class="icon-calendar-clock"></i><span>July 1 1996</span></li>
         </ul>
-      </article>
-      <article class="card">
-        <figure>
-          <img src="./images/placeholder.jpg" alt="Book cover placeholder">
-          <figcaption><h2 class="card-title">Anna Karenina</h2></figcaption>
-        </figure>
-        <ul class="card-meta">
-          <li><i class="icon-account-edit" aria-label="Author" title="Author"></i><span>Leo Tolstoy</span></li>
-          <li><i class="icon-pages"></i><span>1143 pages</span></li>
-          <li><i class="icon-translate"></i><span>English</span></li>
-          <li><i class="icon-calendar-clock"></i><span>July 1 1996</span></li>
-        </ul>
+        <i class="icon-close" aria-label="Delete book" onClick="handleDelete(this.parentNode.getAttribute('data-id'))"></i>
       </article>
     </section>
   </main>

@@ -12,33 +12,29 @@ const addBtn = document.querySelector(".add-btn")
 const addForm = document.querySelector(".add-form")
 const cards = document.querySelector(".cards")
 
-const myLibrary = localStorage.getItem('myLibrary') ? JSON.parse(localStorage.getItem('myLibrary')) : []
+// Initial render from local storage
+let myLibrary = localStorage.getItem('myLibrary') ? JSON.parse(localStorage.getItem('myLibrary')) : []
+console.log(myLibrary)
 renderCards()
 
-// Render cards
 function renderCards() {
-  myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead }) => {
-    const newCard = htmlToElements(`<article class="card">
-      <figure>
-        <img src="./images/placeholder.jpg" alt="${title}">
-        <figcaption><h2 class="card-title">${title}</h2></figcaption>
-      </figure>
-      <ul class="card-meta">
-        <li><i class="icon-account-edit" aria-label="Author" title="Author"></i><span>${author}</span></li>
-        <li><i class="icon-pages" aria-label="Number of pages"></i><span>${pages} pages</span></li>
-        <li><i class="icon-translate" aria-label="Language"></i><span>${language}</span></li>
-        <li><i class="icon-calendar-clock" aria-label="Publish date"></i><span>${new Date(publishDate).toLocaleDateString('en-GB')}</span></li>
-      </ul>
-    </article>`)
+  myLibrary.forEach ( ({title, author, pages, language, publishDate, isRead }, index) => {
+    const newCard = htmlToElements(
+      `<article class="card" data-id="${index}">
+        <figure>
+          <img src="./images/placeholder.jpg" alt="${title}">
+          <figcaption><h2 class="card-title">${title} - ${index}</h2></figcaption>
+        </figure>
+        <ul class="card-meta">
+          <li><i class="icon-account-edit" aria-label="Author" title="Author"></i><span>${author}</span></li>
+          <li><i class="icon-pages" aria-label="Number of pages"></i><span>${pages} pages</span></li>
+          <li><i class="icon-translate" aria-label="Language"></i><span>${language}</span></li>
+          <li><i class="icon-calendar-clock" aria-label="Publish date"></i><span>${new Date(publishDate).toLocaleDateString('en-GB')}</span></li>
+        </ul>
+        <i class="icon-close" aria-label="Delete book" onClick="handleDelete(this.parentNode.getAttribute('data-id'))"></i>
+      </article>`)
   cards.appendChild(newCard[0])
   })
-}
-
-
-function htmlToElements(html) {
-  let template = document.createElement('template');
-  template.innerHTML = html;
-  return template.content.childNodes;
 }
 
 const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio}) => {
@@ -49,6 +45,13 @@ const addBookToLibrary = ({title, author, pages, language, publishDate, isreadra
   myLibrary.push (book)
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
   renderCards()
+}
+
+// Helpers
+function htmlToElements (html) {
+  let template = document.createElement('template')
+  template.innerHTML = html
+  return template.content.childNodes
 }
 
 // Handlers
@@ -65,6 +68,15 @@ const handleSubmit = (e) => {
   addBookToLibrary (formProps)
 }
 
+window.handleDelete = (targetIndex) => {
+  // Remove element from DOM
+  const elementToRemove = document.querySelector(`[data-id="${targetIndex}"]`);
+  elementToRemove.remove()
+
+  myLibrary.splice(targetIndex, 1)
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
+
 // Event listeners
 if (addBtn) {
   addBtn.addEventListener('click', handleAddBookButton)
@@ -73,3 +85,4 @@ if (addBtn) {
 if (addForm) {
   addForm.addEventListener('submit', handleSubmit)
 }
+

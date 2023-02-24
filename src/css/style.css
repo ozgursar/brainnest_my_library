@@ -4,6 +4,7 @@
 
 :root {
   --accent: #FFD300;
+  --accent-hover: #FEDD3C;
   --secondary: #606569;
   --logo-color: #fff;
   --btn-text-color: #222;
@@ -41,6 +42,7 @@ figure {
 header {
   position: fixed;
   align-self: start;
+  z-index: 99;
   top: 0;
   left: 0;
   right: 0;
@@ -86,6 +88,11 @@ main {
   font-size: 0.9em;
   font-weight: 400;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
 }
 
 .btn span {
@@ -111,7 +118,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--header-background);
+  background-color: #333;
   color: #fff;
   font-size: 0.9em;
 }
