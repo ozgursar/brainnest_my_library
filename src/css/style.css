@@ -39,6 +39,11 @@ figure {
   margin: 0;
 }
 
+a {
+  color: inherit;
+  text-decoration: initial;
+}
+
 header {
   position: fixed;
   align-self: start;

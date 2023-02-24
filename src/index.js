@@ -23,7 +23,7 @@ function renderCards() {
       `<article class="card" data-id="${index}">
         <figure>
           <img src="./images/placeholder.jpg" alt="${title}">
-          <figcaption><h2 class="card-title">${title} - ${index}</h2></figcaption>
+          <figcaption><h2 class="card-title">${title}</h2></figcaption>
         </figure>
         <ul class="card-meta">
           <li><i class="icon-account-edit" aria-label="Author" title="Author"></i><span>By ${author}</span></li>

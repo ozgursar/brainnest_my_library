@@ -14,6 +14,9 @@ figure img {
 
 .card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: var(--card-background);
   border-radius: 10px;
   box-shadow: 2px 2px 5px #999;
@@ -23,6 +26,8 @@ figure img {
   text-align: center;
   margin-top: 10px;
   text-transform: capitalize;
+  font-size: 1.6em;
+  padding: 0 15px;
 }
 
 .card-meta {
