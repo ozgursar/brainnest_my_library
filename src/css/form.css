@@ -1,6 +1,5 @@
 .add-form {
   background-color: var(--modal-content-background);
-  padding: 0;
 }
 
 .form-inner {
@@ -9,15 +8,26 @@
 
 .input-fields {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-rows: 1fr;
   gap: 30px;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .two-col-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  width: 100%;
+  position: relative;
 }
 
 input, label, select {
@@ -33,27 +43,19 @@ label {
 }
 
 input, select {
+  width: calc(100% - 20px);
   color: var(--secondary);
   border: 1px solid var(--input-border-color);
   border-radius: 5px;
-  width: 96%;
   padding: 8px;
 }
 
 select {
-  width: 100%;
-}
-
-#publishDate {
-  width: 92%;
+  width: 98%;
 }
 
 input::placeholder, textarea::placeholder {
   color: var(--subtle-gray);
-}
-
-.input-group {
-  position: relative;  
 }
 
 img.check {
@@ -147,8 +149,7 @@ input[type="email"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect, inp
 
 .book-cover-preview {
   width: 100%;
-  max-width: 220px;
-  height: 120px;
+  height: 200px;
   object-fit: cover;
   object-position: center;
   border-radius: 4px;
@@ -156,7 +157,7 @@ input[type="email"]:not(:placeholder-shown):not(:focus):invalid ~.incorrect, inp
 
 .modal-footer {
   background-color: var(--header-background);
-  padding: 8px 0 10px 0;
+  padding: 10px;
 }
 
 .submit-btn {

@@ -71,64 +71,63 @@
               <small class="incorrect">* Min. 2 characters. Only letters.</small>
             </div>
             <div class="two-col-inputs">
-              <div class="input-group">
-                <label for="pages">Number of Pages*</label>
-                <input
-                  type="number"
-                  name="pages"
-                  id="pages"
-                  min="1"
-                  max="10000"
-                  step="1"
-                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                  autocomplete="off"
-                  placeholder="(1-10000)"
-                  required>
-                <img src="./images/check.svg" alt="valid icon" class="check">
-                <small class="incorrect">* Only integer numbers.</small>
+              <div class="col">
+                <div class="input-group">
+                  <label for="pages">Number of Pages*</label>
+                  <input
+                    type="number"
+                    name="pages"
+                    id="pages"
+                    min="1"
+                    max="10000"
+                    step="1"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                    autocomplete="off"
+                    placeholder="(1-10000)"
+                    required>
+                  <img src="./images/check.svg" alt="valid icon" class="check">
+                </div>
+                <div class="input-group">
+                  <label for="language">Language*</label>
+                  <select name="language">
+                    <option value="English" selected>English</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Serbian">Serbian</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label for="publishDate">Publish Date*</label>
+                  <input
+                    type="date"
+                    name="publishDate"
+                    id="publishDate"
+                    autocomplete="off"
+                    required>
+                </div>
+                <div class="input-group">
+                  <label>Is Read?</label>
+                  <div class="switch-field">
+                    <input type="radio" id="radio-one" name="isreadradio" value="yes">
+                    <label for="radio-one">Yes</label>
+                    <input type="radio" id="radio-two" name="isreadradio" value="no" checked>
+                    <label for="radio-two">No</label>
+                  </div>
+                </div>       
               </div>
-              <div class="input-group">
-                <label for="language">Language*</label>
-                <select name="language">
-                  <option value="English" selected>English</option>
-                  <option value="French">French</option>
-                  <option value="German">German</option>
-                  <option value="Dutch">Dutch</option>
-                  <option value="Russian">Russian</option>
-                  <option value="Serbian">Serbian</option>
-                  <option value="Spanish">Spanish</option>
-                  <option value="Turkish">Turkish</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="two-col-inputs">
-              <div class="input-group">
-                <label for="book-cover-file">Book Cover (Optional)</label>
-                <input type="file" id="book-cover-file" onchange="previewFile()">
-              </div>
-              <div class="input-group">
-                <label for="publishDate">Publish Date*</label>
-                <input
-                  type="date"
-                  name="publishDate"
-                  id="publishDate"
-                  autocomplete="off"
-                  required>
-              </div>
-            </div>
-            <div class="two-col-inputs">
-              <div class="input-group">
-                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQUFBQYGBgYICQgJCAwLCgoLDBINDg0ODRIbERQRERQRGxgdGBYYHRgrIh4eIisyKigqMjw2NjxMSExkZIYBBQUFBQUFBgYGBggJCAkIDAsKCgsMEg0ODQ4NEhsRFBERFBEbGB0YFhgdGCsiHh4iKzIqKCoyPDY2PExITGRkhv/CABEIAMgAyAMBIgACEQEDEQH/xAAcAAEBAQEAAwEBAAAAAAAAAAAAAQYHAgQFAwj/2gAIAQEAAAAA/rMAAAFgAAALAAAAWAAAAsAAABYAAACwAAAFgAAALAMl4gHuaMFgGL2gBi9oCwDF7QOF9H1rF7QFgGL2gc22H2WL2gLAMXtMhkuuHh63uYvaAsAxf68L/LpPX/DiPxu+ZnaAsA47z78jpPzcQ+70noQLAP5i9QA2HeAWAZP1gD633wWAAAAsAAABYAAACwAAAFgAAALAAAAWAAAAsAAABf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAIAQIQAAAA0AAAAAAAABQQCxZYBbcakA10S55gKIAAAAAAAAAf/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//aAAgBAxAAAADIAAAAAAAAAJQBLKAzN5tAzzWa6AIKAAAAAAAAAf/EAD0QAAECAwIIDAQFBQAAAAAAAAECAwQFBgAxEhYgMEBBUpMQESEiNDZRVWJ0dbETFHHCByNDc7JCYZHB0f/aAAgBAQABPwDSBeNJF40kXjSReNJF40kXjSReNJF4zDlXMfHfbhpbMIlLThbU4y1hIwk3i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i0tqSGmEb8kuEi4Z8t4aEPt4GGB2ZYvGYojoUz9Te9k5qN68SvyTn3ZYvGYojoUz9Te9k5U6rGcRUe78rFLYYbcIbSjk5BrVaj55ETuXLVFcReZcwFKA4sIXg8Mb14lfkXPuyxeMxRHQpn6m97Jypv+HyY2OciYOLS0l1eEttSOMJJvKbSKSQ8hgRCsqKyVYbiz/UrhjevEr8i592WLxmKI6FM/U3vZPBVNUsyNksMFK4xaeanUgbSrUrWjrb3yc2eKkOK5j6r0E6leHIccbabW44tKUJSVKUo8QAGs2gJhBzOHTEwbyXGiSOMdo1EG7gjevEr8i592WLxmKI6FM/U3vZNqpqlmRslhgpXGLTzU6kDaVZ992JeW88tS3FqJUpV5J4KQrAwnw5dMnPybmnj+n4VeG19nHG2W1uOLSlCUlSlKPEABrNqsqxycrMJCFSINJ+hdI1nw9gtIJ9FSGL+K1zmlcjrWpQ/7aXTGEmkI3FQrmE2r/IPYew2jevEr8i592WLxmIOp25FK5kyyAqLdmL5QDcgcQGEbPvvRLy3nnFLcWrjUpXKScikKwEIG5dMnPyLmXj+n4VeG1WVWucOGEhFFMGlX0LpGs+HsHDIZ9FyGLDrRwmlcjrRuWP9HsNm5jCTSrpPFQrmEhUC59UnnchyxeMxH9Oi/wB9z+WaoXrHDftufxyxeMxGUVIY2JdiFsuJW4oqVgLIBJtiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tKaZlEmeU/CtK+IU4OGtWEQP7ZYvGki8aSLxpIvGki8aSLxpIvGki8aSLxb/8QAHxEAAQMFAQEBAAAAAAAAAAAAAQARUQIQITBBUBIx/9oACAECAQE/APXCxCxCxCxCxGjhvS3Uf1DRwqml1VTFvnCHdFIe7B3sR3S5lOZTmU5lOfZ//8QAHhEAAQMFAQEAAAAAAAAAAAAAAAERUQIQITBBUBL/2gAIAQMBAT8A9jMmZMyZkzo7ep+CC6OlVTFNU2+si6Kla7qzWReaWSBkgZIGSBk9n//Z" height="200" class="book-cover-preview" alt="Image preview" />
-                <input type="hidden" name="bookcover" class="bookcover" value="">
-              </div>              
-              <div class="input-group">
-                <label>Is Read?</label>
-                <div class="switch-field">
-                  <input type="radio" id="radio-one" name="isreadradio" value="yes">
-                  <label for="radio-one">Yes</label>
-                  <input type="radio" id="radio-two" name="isreadradio" value="no" checked>
-                  <label for="radio-two">No</label>
+              <div class="col">
+                <div class="input-group">
+                  <label for="book-cover-file">Book Cover (Optional)</label>
+                  <input type="file" id="book-cover-file" onchange="previewFile()">
+                </div>
+                <div class="input-group">
+                  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQUFBQYGBgYICQgJCAwLCgoLDBINDg0ODRIbERQRERQRGxgdGBYYHRgrIh4eIisyKigqMjw2NjxMSExkZIYBBQUFBQUFBgYGBggJCAkIDAsKCgsMEg0ODQ4NEhsRFBERFBEbGB0YFhgdGCsiHh4iKzIqKCoyPDY2PExITGRkhv/CABEIAMgAyAMBIgACEQEDEQH/xAAcAAEBAQEAAwEBAAAAAAAAAAAAAQYHAgQFAwj/2gAIAQEAAAAA/rMAAAFgAAALAAAAWAAAAsAAABYAAACwAAAFgAAALAMl4gHuaMFgGL2gBi9oCwDF7QOF9H1rF7QFgGL2gc22H2WL2gLAMXtMhkuuHh63uYvaAsAxf68L/LpPX/DiPxu+ZnaAsA47z78jpPzcQ+70noQLAP5i9QA2HeAWAZP1gD633wWAAAAsAAABYAAACwAAAFgAAALAAAAWAAAAsAAABf/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAIAQIQAAAA0AAAAAAAABQQCxZYBbcakA10S55gKIAAAAAAAAAf/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//aAAgBAxAAAADIAAAAAAAAAJQBLKAzN5tAzzWa6AIKAAAAAAAAAf/EAD0QAAECAwIIDAQFBQAAAAAAAAECAwQFBgAxEhYgMEBBUpMQESEiNDZRVWJ0dbETFHHCByNDc7JCYZHB0f/aAAgBAQABPwDSBeNJF40kXjSReNJF40kXjSReNJF4zDlXMfHfbhpbMIlLThbU4y1hIwk3i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i2Ni+4ZvuLY2L7hm+4tjYvuGb7i0tqSGmEb8kuEi4Z8t4aEPt4GGB2ZYvGYojoUz9Te9k5qN68SvyTn3ZYvGYojoUz9Te9k5U6rGcRUe78rFLYYbcIbSjk5BrVaj55ETuXLVFcReZcwFKA4sIXg8Mb14lfkXPuyxeMxRHQpn6m97Jypv+HyY2OciYOLS0l1eEttSOMJJvKbSKSQ8hgRCsqKyVYbiz/UrhjevEr8i592WLxmKI6FM/U3vZPBVNUsyNksMFK4xaeanUgbSrUrWjrb3yc2eKkOK5j6r0E6leHIccbabW44tKUJSVKUo8QAGs2gJhBzOHTEwbyXGiSOMdo1EG7gjevEr8i592WLxmKI6FM/U3vZNqpqlmRslhgpXGLTzU6kDaVZ992JeW88tS3FqJUpV5J4KQrAwnw5dMnPybmnj+n4VeG19nHG2W1uOLSlCUlSlKPEABrNqsqxycrMJCFSINJ+hdI1nw9gtIJ9FSGL+K1zmlcjrWpQ/7aXTGEmkI3FQrmE2r/IPYew2jevEr8i592WLxmIOp25FK5kyyAqLdmL5QDcgcQGEbPvvRLy3nnFLcWrjUpXKScikKwEIG5dMnPyLmXj+n4VeG1WVWucOGEhFFMGlX0LpGs+HsHDIZ9FyGLDrRwmlcjrRuWP9HsNm5jCTSrpPFQrmEhUC59UnnchyxeMxH9Oi/wB9z+WaoXrHDftufxyxeMxGUVIY2JdiFsuJW4oqVgLIBJtiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tiBT2w/vLYgU9sP7y2IFPbD+8tKaZlEmeU/CtK+IU4OGtWEQP7ZYvGki8aSLxpIvGki8aSLxpIvGki8aSLxb/8QAHxEAAQMFAQEBAAAAAAAAAAAAAQARUQIQITBBUBIx/9oACAECAQE/APXCxCxCxCxCxGjhvS3Uf1DRwqml1VTFvnCHdFIe7B3sR3S5lOZTmU5lOfZ//8QAHhEAAQMFAQEAAAAAAAAAAAAAAAERUQIQITBBUBL/2gAIAQMBAT8A9jMmZMyZkzo7ep+CC6OlVTFNU2+si6Kla7qzWReaWSBkgZIGSBk9n//Z" height="200" class="book-cover-preview" alt="Image preview" />
+                  <input type="hidden" name="bookcover" class="bookcover" value="">
                 </div>
               </div>
             </div>

@@ -71,7 +71,7 @@ header {
 
 .logo svg {
   fill: var(--logo-color);
-  height: 60px;
+  height: 65px;
   width: auto;
   transition: fill 0.2s ease-in-out;
 }
