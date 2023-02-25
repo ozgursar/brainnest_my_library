@@ -1,6 +1,7 @@
 import { openModal, closeModal } from "./modal.js"
 import Book from "./book.js"
 import handleSortChange from "./sort-books.js"
+import updateProgress from "./progress-bar.js"
 import './css/style.css'
 import favicon from './images/bookshelf.svg'
 import checkicon from './images/check.svg'
@@ -16,6 +17,7 @@ const sortSelection = document.querySelector('#sort-selection')
 // Force default sort (by date of addition) in inital render
 let myLibrary = localStorage.getItem('myLibrary') ? JSON.parse(localStorage.getItem('myLibrary')) : []
 handleSortChange()
+updateProgress()
 renderCards()
 
 const addBookToLibrary = ({title, author, pages, language, publishDate, isreadradio, bookcover}) => {
@@ -24,6 +26,7 @@ const addBookToLibrary = ({title, author, pages, language, publishDate, isreadra
   const book = new Book (title, author, pages, language, publishDate, isRead, bookcover)
   myLibrary.push (book)
   updateLocalStorage()
+  updateProgress()
   renderCards()
 }
 
@@ -96,12 +99,14 @@ const handleSubmit = (e) => {
 window.handleDelete = (targetIndex) => {
   myLibrary.splice(targetIndex, 1)
   updateLocalStorage()
+  updateProgress()
   renderCards()
 }
 
 window.handleToggleRead = ({item, value}) => {
   myLibrary[item].isRead=value
   updateLocalStorage()
+  updateProgress()
 }
 
 window.previewFile = () => {

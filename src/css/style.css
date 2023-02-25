@@ -1,6 +1,7 @@
 @import "./fonts.css";
 @import "./form.css";
 @import "./card.css";
+@import "./progress-bar.css";
 
 :root {
   --accent: #FFD300;
@@ -53,7 +54,7 @@ header {
   right: 0;
   display: grid;
   grid-template-columns: auto max-content max-content;
-  gap: 15px;
+  gap: 30px;
   align-items: center;
   background-color: var(--header-background);
   min-height: 70px;
@@ -128,15 +129,18 @@ main {
 
 footer {
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 15px;
   background-color: #333;
   color: #fff;
   font-size: 0.9em;
   line-height: 1.5;
   padding: 10px 40px;
+}
+
+footer small {
+  text-align: right;
 }
 
 

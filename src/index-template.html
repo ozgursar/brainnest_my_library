@@ -11,7 +11,7 @@
   <header>
     <section class="logo" aria-labelledby="site-title">
       <a href="./index.html" class="home-link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="65" fill="#fff"><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>
       </a>
       <h1 id="site-title">My Library</h1>
     </section>
@@ -32,7 +32,14 @@
     </section>
   </main>
   <footer>
-    <small>© My Library</small>
+    <section id="progress-bar">
+      <div class="progress">
+        <div class="bar pattern">
+          <span id="progress-amount"></span>
+        </div>
+        <small class="nobooksread">No books read</small>
+      </div>
+    </section>
     <small>Designed by <a href="https://github.com/ozgursar" target="_blank">Ozgur Sar</a> as an assignment for Brainnest</small>
   </footer>
   <dialog open class="modal" aria-modal="true">
@@ -53,7 +60,7 @@
                 autocomplete="off"
                 placeholder="Min. 2 characters. Only numbers, letters or dash."
                 required>
-              <img src="./images/check.svg" alt="valid icon" class="check">
+              <img src="./images/check.svg" alt="valid icon" class="check" width="13" height="13">
               <small class="incorrect">* Min. 2 characters. Only numbers, letters or dash.</small>
             </div>
             <div class="input-group">
@@ -67,7 +74,7 @@
                 autocomplete="off"
                 placeholder="Min. 2 characters. Only letters."
                 required>
-              <img src="./images/check.svg" alt="valid icon" class="check">
+              <img src="./images/check.svg" alt="valid icon" class="check" width="13" height="13">
               <small class="incorrect">* Min. 2 characters. Only letters.</small>
             </div>
             <div class="two-col-inputs">
@@ -85,7 +92,7 @@
                     autocomplete="off"
                     placeholder="(1-10000)"
                     required>
-                  <img src="./images/check.svg" alt="valid icon" class="check">
+                  <img src="./images/check.svg" alt="valid icon" class="check" width="13" height="13">
                 </div>
                 <div class="input-group">
                   <label for="language">Language*</label>
