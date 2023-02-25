@@ -4,7 +4,7 @@ const updateProgress = () => {
   const progressAmount = document.querySelector(".pattern span")
   const noBooksRead = document.querySelector(".nobooksread")
   
-  const myLibrary = JSON.parse(localStorage.getItem('myLibrary'))
+  const myLibrary = localStorage.getItem('myLibrary') ? JSON.parse(localStorage.getItem('myLibrary')) : []
   const readBooks = myLibrary.filter((book) => {
     return book.isRead
   })
