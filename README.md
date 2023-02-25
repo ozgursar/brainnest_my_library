@@ -7,7 +7,7 @@ Link: https://ozgursar.github.io/brainnest_my_library/
 * HTML5 input validations
 * File reader and base64 encoded images for uploading book covers
 * Masked radio button for IsRead toggle
-* Seperate Webpack config usage for development and production environments
+* Seperate Webpack configs for development and production environments
 * ES6 module export / import for better code organization
 * CSS grid layout for responsiveness
 * Custom made font for icons (via icomoon)
