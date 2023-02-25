@@ -9,3 +9,5 @@ Link: https://ozgursar.github.io/brainnest_my_library/
 * Masked radio button for IsRead toggle
 * Seperate Webpack config usage for development and production environments
 * ES6 module export / import for better code organization
+* CSS grid layout for responsiveness
+* Custom made font for icons (via icomoon)
