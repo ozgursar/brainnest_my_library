@@ -48,7 +48,7 @@ function renderCards(itemToRender) {
   if (renderedLibrary.length) {
   renderedLibrary.forEach ( ({title, author, pages, language, publishDate, isRead, bookcover }, index) => {
     const newCard = htmlToElements(
-      `<article class="card" data-id="${index}">
+      `<article class="card" data-id="${index}" style="animation-delay: ${index*200}ms;">
         <figure>
           <img src="${bookcover ? bookcover : './images/placeholder.jpg'}" alt="${title}">
           <figcaption><h2 class="card-title">${title}</h2></figcaption>
